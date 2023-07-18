@@ -10,7 +10,7 @@ services:
     build:
         context: ../scicat-backend-next
         dockerfile: Dockerfile
-   # image: ghcr.io/scicatproject/backend-next:latest
+    #image: ghcr.io/scicatproject/backend-next:latest
     ports:
       - '3000:3000'
     depends_on:
@@ -29,6 +29,10 @@ services:
       METADATA_KEYS_RETURN_LIMIT: 100
       METADATA_PARENT_INSTANCES_RETURN_LIMIT: 100
       ADMIN_GROUPS: admin,ingestor
+    # volumes:
+    #  - ../scicat-backend-next:/app
+    #  - ./scicat-backend-next/node_modules:/app/node_modules
+
   scicat-frontend:
     image: ghcr.io/scicatproject/frontend:77ff22bf502164bc57828824d11296c0a8c82a46
     ports:
