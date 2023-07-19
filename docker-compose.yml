@@ -1,0 +1,44 @@
+version: "3.8"
+services:
+  mongo:
+    image: bitnami/mongodb:4.0
+    volumes:
+      - "mongodb_data:/bitnami"
+    ports:
+      - "27017:27017"
+  scicat-backend:
+    build:
+        context: ../scicat-backend-next
+        dockerfile: Dockerfile
+    #image: ghcr.io/scicatproject/backend-next:latest
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongo
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/scicat
+      EXPRESS_SESSION_SECRET: "${EXPRESS_SESSION_SECRET}"
+      JWT_SECRET: "${JWT_SECRET}"
+      PORT: 3000
+      HTTP_MAX_REDIRECTS: 5
+      HTTP_TIMEOUT: 5000
+      JWT_EXPIRES_IN: 3600
+      SITE: SAMPLE-SITE
+      PID_PREFIX: PID.SAMPLE.PREFIX
+      DOI_PREFIX: DOI.SAMPLE.PREFIX
+      METADATA_KEYS_RETURN_LIMIT: 100
+      METADATA_PARENT_INSTANCES_RETURN_LIMIT: 100
+      ADMIN_GROUPS: admin,ingestor
+    # volumes:
+    #  - ../scicat-backend-next:/app
+    #  - ./scicat-backend-next/node_modules:/app/node_modules
+
+  scicat-frontend:
+    image: ghcr.io/scicatproject/frontend:77ff22bf502164bc57828824d11296c0a8c82a46
+    ports:
+      - "8080:80"
+    depends_on:
+      - scicat-backend
+volumes:
+  mongodb_data:
+    driver: local
