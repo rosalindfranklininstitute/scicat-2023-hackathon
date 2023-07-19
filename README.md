@@ -26,6 +26,6 @@ Run services in live development mode on the backend undo the commented lines. M
 To add the data provided for the hackathon please use the following:
 
 ```
-docker exec -i scicat-workshop-hackathon_mongo_1 sh -c "mongorestore --archive" < /data/scicat.dump
+docker-compose exec -T mongo sh -c "mongorestore --archive --nsTo=\"scicat.*\"  --nsFrom=\"dacat.*\"" < /data/scicat-hackathon.dump
 ```
 
