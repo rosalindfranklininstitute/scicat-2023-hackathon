@@ -20,6 +20,9 @@ Run services in live development mode on the backend undo the commented lines. M
     #  - ../scicat-backend-next:/app
     #  - ./scicat-backend-next/node_modules:/app/node_modules
 ```
+To see the data login with the `ingestor` account: 
+username: `ingestor`
+password: `aman`
 
 
 ## Adding the data 
