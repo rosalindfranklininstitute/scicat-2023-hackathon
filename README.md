@@ -11,6 +11,8 @@ EXPRESS_SESSION_SECRET: burrowing_owl
 JWT_SECRET: goblin_shark
 ```
 
+Please change the ports so that we do not collide, add the last digit of your user number to the ports.
+
 Run services:
 `docker-compose up`
 
